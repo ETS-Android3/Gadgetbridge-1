@@ -41,4 +41,7 @@ public class PineTimeJFConstants {
     public static final UUID UUID_CHARACTERISTIC_MOTION_STEP_COUNT = UUID.fromString("00030001-78fc-48fe-8e23-433b3a1942d0");
     public static final UUID UUID_CHARACTERISTIC_MOTION_RAW_XYZ_VALUES = UUID.fromString("00030002-78fc-48fe-8e23-433b3a1942d0");
 
+    // IOT
+    public static final UUID UUID_SERVICE_IOT = UUID.fromString("10000000-78fc-48fe-8e23-433b3a1942d0");
+    public static final UUID UUID_CHARACTERISTIC_IOT_BUTTON = UUID.fromString("10000001-78fc-48fe-8e23-433b3a1942d0");
 }

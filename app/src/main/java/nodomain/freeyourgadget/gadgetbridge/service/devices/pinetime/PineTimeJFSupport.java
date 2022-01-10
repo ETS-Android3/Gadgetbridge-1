@@ -233,6 +233,7 @@ public class PineTimeJFSupport extends AbstractBTLEDeviceSupport implements DfuL
         addSupportedService(PineTimeJFConstants.UUID_SERVICE_MUSIC_CONTROL);
         addSupportedService(PineTimeJFConstants.UUID_CHARACTERISTIC_ALERT_NOTIFICATION_EVENT);
         addSupportedService(PineTimeJFConstants.UUID_SERVICE_MOTION);
+        addSupportedService(PineTimeJFConstants.UUID_SERVICE_IOT);
 
         IntentListener mListener = new IntentListener() {
             @Override
@@ -639,6 +640,13 @@ public class PineTimeJFSupport extends AbstractBTLEDeviceSupport implements DfuL
             }
             onReceiveStepsSample(steps);
             return true;
+        } else if (characteristicUUID.equals(PineTimeJFConstants.UUID_CHARACTERISTIC_IOT_BUTTON)) {
+            int buttonNumber = BLETypeConversions.toUint32(characteristic.getValue());
+            //if (LOG.isDebugEnabled()) {
+                LOG.info("onCharacteristicChanged: IotService:Button=" + buttonNumber);
+          //  }
+            onReceiveIotButton(buttonNumber);
+            return true;
         }
 
         LOG.info("Unhandled characteristic changed: " + characteristicUUID);
@@ -736,6 +744,10 @@ public class PineTimeJFSupport extends AbstractBTLEDeviceSupport implements DfuL
             LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
         }
 
+    }
+
+    private void onReceiveIotButton(int buttonNumber) {
+        LOG.debug("received iot button press " + buttonNumber);
     }
 
     /**
